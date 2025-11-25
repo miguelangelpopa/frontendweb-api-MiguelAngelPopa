@@ -1,69 +1,69 @@
+/* index.css */
+
+/* 1. Importación de Tailwind CSS */
 @import 'tailwindcss';
+
+/* 2. Reseteo y Estilos Base para todo el documento */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Fuentes limpias y modernas */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Color de acento (azul) */
+  --color-accent: #3b82f6; /* blue-500 */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* 3. Estilos del Body (Eliminamos el centrado forzado) */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* La transición suave hace que el cambio de modo oscuro sea agradable */
+  transition: background-color 0.3s, color 0.3s; 
 }
 
+/* 4. Estilos por Defecto: Modo Claro (Light Mode) */
+/* Este es el esquema que verá la mayoría por defecto o si no tienen preferencia */
+:root {
+  color-scheme: light;
+  color: #1f2937; /* gray-800 para texto principal */
+  background-color: #ffffff; /* Fondo blanco */
+}
+
+/* 5. Estilos de Links */
+a {
+  font-weight: 600;
+  color: var(--color-accent); /* Usando el azul definido */
+  text-decoration: none; /* Sin subrayado por defecto */
+}
+a:hover {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+}
+
+/* 6. Modo Nocturno (Dark Mode) Automático */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    color: #e5e7eb; /* gray-200 para texto principal */
+    background-color: #0d1117; /* Fondo negro muy oscuro (similar a GitHub dark) */
+  }
+
+  /* El fondo de tu componente de React (bg-gray-50) se oscurecerá automáticamente gracias a Tailwind */
+}
+
+/* 7. Estilos de Tipografía (Opcional, si no usas clases de Tailwind) */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-weight: 700;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+/* 8. Estilos de Botones (Solo si no usas las clases de Tailwind en ellos) */
+/* Hemos dejado los botones sin estilos globales para que los estilos de Tailwind en el componente los controlen. */
