@@ -12,7 +12,7 @@ export default function WorkerDashboard() {
           Your Time Management Portal
         </p>
         <h1 className="text-5xl font-extrabold text-gray-900 tracking-tighter">
-          Welcome back, <span className="text-indigo-600">{name}</span>! 👋
+          Welcome back, <span className="text-indigo-600">{name}</span>
         </h1>
       </header>
       
@@ -38,7 +38,7 @@ export default function WorkerDashboard() {
           </p>
 
           <Link
-            to="/hours"
+            to="/workerHours"
             className="flex items-center justify-center w-full py-4 text-xl font-bold text-white bg-indigo-600 rounded-xl shadow-lg hover:bg-indigo-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
           >
             <svg
