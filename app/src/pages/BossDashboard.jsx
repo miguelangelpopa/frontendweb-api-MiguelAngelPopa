@@ -31,29 +31,49 @@ const getStatusBadge = (status) => {
 };
 
 export default function BossDashboard() {
-  const pendingReports = reportsMock.filter(r => r.status.toLowerCase() === 'pending').length;
+  const pendingReports = reportsMock.filter(
+    (r) => r.status.toLowerCase() === "pending"
+  ).length;
   const totalReports = reportsMock.length;
   const approvedHours = reportsMock
-    .filter(r => r.status.toLowerCase() === 'approved')
+    .filter((r) => r.status.toLowerCase() === "approved")
     .reduce((sum, report) => sum + report.hours, 0);
 
   const summaryCards = [
-    { title: "Reports Pending Review", value: pendingReports, icon: "⏳", color: "text-yellow-500", bgColor: "bg-yellow-50" },
-    { title: "Total Reports Submitted", value: totalReports, icon: "📄", color: "text-blue-500", bgColor: "bg-blue-50" },
-    { title: "Total Approved Hours", value: `${approvedHours}h`, icon: "✅", color: "text-green-500", bgColor: "bg-green-50" },
+    {
+      title: "Reports Pending Review",
+      value: pendingReports,
+      icon: "⏳",
+      color: "text-yellow-500",
+      bgColor: "bg-yellow-50",
+    },
+    {
+      title: "Total Reports Submitted",
+      value: totalReports,
+      icon: "📄",
+      color: "text-blue-500",
+      bgColor: "bg-blue-50",
+    },
+    {
+      title: "Total Approved Hours",
+      value: `${approvedHours}h`,
+      icon: "✅",
+      color: "text-green-500",
+      bgColor: "bg-green-50",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">
-      Boss Dashboard Overview
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200 p-6 md:p-10">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8 tracking-tight">
+        Boss dashboard overview
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         {summaryCards.map((card, index) => (
           <div
             key={index}
-            className={`flex items-center p-6 ${card.bgColor} rounded-xl shadow-lg transition duration-300 hover:shadow-xl`}
+            className={`flex items-center p-6 ${card.bgColor} rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:-translate-y-1`}
           >
             <div
               className={`p-4 rounded-full ${card.color} bg-white shadow-md`}
@@ -72,15 +92,14 @@ export default function BossDashboard() {
         ))}
       </div>
 
-
-      <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-        Time Reports to Review
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        Time reports to review
       </h2>
 
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-100">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Worker
@@ -121,10 +140,10 @@ export default function BossDashboard() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link
-                      to={`/boss/worker/${report.id}`}
+                      to={''}
                       className="text-indigo-600 hover:text-indigo-900 transition duration-150 font-semibold"
                     >
-                      Review →
+                      Review → 
                     </Link>
                   </td>
                 </tr>

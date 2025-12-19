@@ -1,5 +1,26 @@
 {
+"scripts": {
+  "build": "nest build",
+  "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+  "start": "nest start",
+  "start:dev": "nest start --watch",
+  "start:debug": "nest start --debug --watch",
+  "start:prod": "node dist/main",
+  "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+  "test": "env-cmd -f .env.test jest --runInBand",
+  "test:watch": "pnpm test --watch",
+  "test:cov": "pnpm test --coverage",
+  "test:e2e": "pnpm test --config ./jest-e2e.config.ts",
+  "test:e2e:cov": "pnpm test --config ./jest-e2e.config.ts --runInBand --coverage",
+
+  "db:generate": "drizzle-kit generate",
+  "db:migrate": "drizzle-kit migrate",
+  "db:seed": "env-cmd tsx src/drizzle/seed.ts"
+},
+
 	"dependencies": {
+		"@faker-js/faker": "^10.1.0",
 		"react-router-dom": "^7.9.6"
 	}
 }
+
