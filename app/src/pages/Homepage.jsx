@@ -44,7 +44,7 @@ const Homepage = () => {
   const next = () => setCurrent((prev) => (prev + 1) % slides.length);
 
   return (
-    <div className="text-black">
+    <div className="text-black dark:text-slate-100 bg-white dark:bg-slate-950">
       {/* HOME / SLIDER */}
       <section id="home" className="relative min-h-screen overflow-hidden">
         {slides.map((slide, index) => (
@@ -114,28 +114,31 @@ const Homepage = () => {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-16 bg-gray-50">
+      <section
+        id="about"
+        className="py-16 bg-gray-50 dark:bg-slate-900/60 transition-colors"
+      >
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="text-3xl font-bold mb-4">
-              Welkom bij Clavimial Technical Solutions - Uw partner in renovaties
-              en elektriciteitswerken
+            <h2 className="text-3xl font-bold mb-4 text-black dark:text-slate-100">
+              Welkom bij Clavimial Technical Solutions - Uw partner in
+              renovaties en elektriciteitswerken
             </h2>
-            <p className="mb-3">
+            <p className="mb-3 text-gray-800 dark:text-slate-300">
               Bij Clavimial Technical Solutions staan wij voor flexibiliteit,
               kwaliteit en klanttevredenheid.
             </p>
-            <p className="mb-3">
+            <p className="mb-3 text-gray-800 dark:text-slate-300">
               Met een gedreven team van vakbekwame specialisten en betrouwbare
               onderaannemers leveren wij topwerk dat aan al uw verwachtingen
               voldoet. Van kleine renovaties tot grote verbouwingen, wij zorgen
               ervoor dat elk project met zorg en vakmanschap wordt uitgevoerd.
             </p>
-            <p className="mb-3">
+            <p className="mb-3 text-gray-800 dark:text-slate-300">
               Dankzij onze jarenlange ervaring in de sector en ons oog voor
               detail, kunt u rekenen op:
             </p>
-            <ul className="list-disc list-inside mb-6 space-y-1">
+            <ul className="list-disc list-inside mb-6 space-y-1 text-gray-800 dark:text-slate-300">
               <li>Renovatie van woningen</li>
               <li>Vloeren leggen en tegels leggen</li>
               <li>Ontwerpen en installeren van verlaagde plafonds</li>
@@ -146,7 +149,7 @@ const Homepage = () => {
             </ul>
             <a
               href="#contactForm"
-              className="inline-block bg-white hover:bg-black text-black hover:text-white px-6 py-2 rounded-full font-semibold transition"
+              className="inline-block bg-white hover:bg-black text-black hover:text-white px-6 py-2 rounded-full font-semibold transition dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-black dark:hover:text-white"
             >
               Contacteer Ons
             </a>
@@ -162,35 +165,40 @@ const Homepage = () => {
       </section>
 
       {/* COUNTERS */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-6 text-center">
-          <div className="bg-gray-50 rounded-2xl p-6 shadow">
-            <h3 className="text-3xl font-extrabold text-black">180</h3>
-            <p className="mt-2 font-semibold">Projecten gedaan</p>
-          </div>
-          <div className="bg-gray-50 rounded-2xl p-6 shadow">
-            <h3 className="text-3xl font-extrabold text-black">+5000</h3>
-            <p className="mt-2 font-semibold">Uren werk</p>
-          </div>
-          <div className="bg-gray-50 rounded-2xl p-6 shadow">
-            <h3 className="text-3xl font-extrabold text-black">1000</h3>
-            <p className="mt-2 font-semibold">Ideeën</p>
-          </div>
-          <div className="bg-gray-50 rounded-2xl p-6 shadow">
-            <h3 className="text-3xl font-extrabold text-black">50</h3>
-            <p className="mt-2 font-semibold">Klanten</p>
-          </div>
+          {[
+            { label: "Projecten gedaan", value: "180" },
+            { label: "Uren werk", value: "+5000" },
+            { label: "Ideeën", value: "1000" },
+            { label: "Klanten", value: "50" },
+          ].map((c) => (
+            <div
+              key={c.label}
+              className="bg-gray-50 dark:bg-slate-900 rounded-2xl p-6 shadow"
+            >
+              <h3 className="text-3xl font-extrabold text-black dark:text-slate-100">
+                {c.value}
+              </h3>
+              <p className="mt-2 font-semibold text-gray-800 dark:text-slate-300">
+                {c.label}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-20 bg-slate-50">
+      <section
+        id="services"
+        className="py-20 bg-slate-50 dark:bg-slate-900/70"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-black tracking-tight">
+            <h2 className="text-4xl font-extrabold text-black dark:text-slate-100 tracking-tight">
               Diensten
             </h2>
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-600 dark:text-slate-300">
               We zijn hier om uw ideeën te ontwikkelen
             </p>
           </div>
@@ -230,7 +238,7 @@ const Homepage = () => {
             ].map((service) => (
               <div
                 key={service.title}
-                className="relative bg-white rounded-[40px] px-10 py-10 shadow-[0_18px_40px_rgba(15,23,42,0.08)] flex flex-col items-center text-center hover:shadow-[0_22px_50px_rgba(15,23,42,0.14)] transition-shadow duration-300"
+                className="relative bg-white dark:bg-slate-900 rounded-[40px] px-10 py-10 shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_40px_rgba(15,23,42,0.6)] flex flex-col items-center text-center hover:shadow-[0_22px_50px_rgba(15,23,42,0.14)] dark:hover:shadow-[0_22px_50px_rgba(15,23,42,0.9)] transition-shadow duration-300"
               >
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-[#0f3364]">
                   {service.icon ? (
@@ -244,10 +252,10 @@ const Homepage = () => {
                   )}
                 </div>
 
-                <h3 className="text-lg md:text-xl font-semibold text-black mb-3">
+                <h3 className="text-lg md:text-xl font-semibold text-black dark:text-slate-100 mb-3">
                   {service.title}
                 </h3>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-600 dark:text-slate-300 leading-relaxed">
                   {service.text}
                 </p>
               </div>
@@ -257,22 +265,27 @@ const Homepage = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-16 bg-gray-50">
+      <section
+        id="projects"
+        className="py-16 bg-gray-50 dark:bg-slate-900/70"
+      >
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-10 text-black">Projecten</h2>
+          <h2 className="text-3xl font-bold mb-10 text-black dark:text-slate-100">
+            Projecten
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {projects.map((p) => (
               <div
                 key={p.title}
-                className="rounded-2xl overflow-hidden shadow hover:shadow-lg transition"
+                className="rounded-2xl overflow-hidden shadow hover:shadow-lg transition bg-white dark:bg-slate-900"
               >
                 <img
                   src={p.img}
                   alt={`Foto van project: ${p.title}`}
                   className="w-full h-64 object-cover"
                 />
-                <div className="p-4 bg-white">
-                  <h3 className="text-lg font-semibold text-black">
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-black dark:text-slate-100">
                     {p.title}
                   </h3>
                 </div>
@@ -283,12 +296,17 @@ const Homepage = () => {
       </section>
 
       {/* CONTACT + MAP */}
-      <section id="contact" className="py-16 bg-gray-50">
+      <section
+        id="contact"
+        className="py-16 bg-gray-50 dark:bg-slate-900/70"
+      >
         <div className="container mx-auto px-6">
           <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-black">Contact</h2>
+            <h2 className="text-3xl font-bold text-black dark:text-slate-100">
+              Contact
+            </h2>
           </div>
-          <div className="mb-6 space-y-1 text-center">
+          <div className="mb-6 space-y-1 text-center text-gray-800 dark:text-slate-300">
             <p>
               <strong>Clavimial Technical Solutions BV</strong>
             </p>
@@ -302,7 +320,7 @@ const Homepage = () => {
               Email:{" "}
               <a
                 href="mailto:clavimial@telenet.be"
-                className="text-black underline"
+                className="underline text-black dark:text-slate-100"
               >
                 clavimial@telenet.be
               </a>
@@ -311,7 +329,7 @@ const Homepage = () => {
               Of contacteer ons via het{" "}
               <a
                 href="#contactForm"
-                className="text-black underline font-medium"
+                className="underline font-medium text-black dark:text-slate-100"
               >
                 contactformulier
               </a>
@@ -333,40 +351,42 @@ const Homepage = () => {
       </section>
 
       {/* CONTACT FORM */}
-      <section id="contactForm" className="py-16 bg-white">
+      <section id="contactForm" className="py-16 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-6">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-2 text-black">
+            <h2 className="text-3xl font-bold mb-2 text-black dark:text-slate-100">
               Contacteer ons
             </h2>
-            <p>Geslaagde projecten met Clavimial Technical Solutions</p>
+            <p className="text-gray-700 dark:text-slate-300">
+              Geslaagde projecten met Clavimial Technical Solutions
+            </p>
           </div>
-          <form className="max-w-3xl mx-auto bg-gray-50 p-6 rounded-2xl shadow space-y-4">
+          <form className="max-w-3xl mx-auto bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl shadow space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <input
                 type="text"
                 placeholder="Uw Naam"
-                className="border border-gray-300 rounded-lg p-2 w-full"
+                className="border border-gray-300 rounded-lg p-2 w-full dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
               />
               <input
                 type="email"
                 placeholder="Uw Email"
-                className="border border-gray-300 rounded-lg p-2 w-full"
+                className="border border-gray-300 rounded-lg p-2 w-full dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
               />
             </div>
             <input
               type="tel"
               placeholder="Uw Telefoon"
-              className="border border-gray-300 rounded-lg p-2 w-full"
+              className="border border-gray-300 rounded-lg p-2 w-full dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
             />
             <textarea
               placeholder="Uw Bericht"
-              className="border border-gray-300 rounded-lg p-2 w-full h-32"
+              className="border border-gray-300 rounded-lg p-2 w-full h-32 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
             ></textarea>
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-white hover:bg-black text-black hover:text-white px-6 py-2 rounded-full font-semibold transition"
+                className="bg-white hover:bg-black text-black hover:text-white px-6 py-2 rounded-full font-semibold transition dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-black dark:hover:text-white"
               >
                 Stuur bericht
               </button>

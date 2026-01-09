@@ -1,81 +1,156 @@
-import { Link } from "react-router";
+import { useCallback } from "react";
+import { Link, useNavigate, useLocation } from "react-router";
+import { FormProvider, useForm } from "react-hook-form";
+import { useAuth } from "../contexts/auth";
+
+const validationRules = {
+  email: {
+    required: "Email is required",
+  },
+  password: {
+    required: "Password is required",
+  },
+};
 
 const Login = () => {
-  const handleGoogleLogin = () => {
-    console.log("Google login");
-  };
+  const { error, loading, login } = useAuth();
+  const navigate = useNavigate();
+  const { search } = useLocation();
 
-  const handleFacebookLogin = () => {
-    console.log("Facebook login");
-  };
+  const methods = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const { handleSubmit, reset, register, formState } = methods;
+  const { errors } = formState;
+
+  const handleCancel = useCallback(() => {
+    reset();
+  }, [reset]);
+
+  const handleLogin = useCallback(
+    async ({ email, password }) => {
+      const loggedIn = await login(email, password);
+      if (loggedIn) {
+        const params = new URLSearchParams(search);
+        navigate({
+          pathname: params.get("redirect") || "/",
+          replace: true,
+        });
+      }
+    },
+    [login, navigate, search]
+  );
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-gray-100 text-blue-700">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-80 flex flex-col items-center space-y-6">
-        <h1 className="text-3xl font-bold text-center">Welcome back!</h1>
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 px-4">
+      <div className="relative w-full max-w-md">
+        {/* Glow de fondo */}
+        <div className="pointer-events-none absolute -inset-1 rounded-3xl bg-gradient-to-tr from-indigo-500/40 via-sky-400/30 to-emerald-400/40 blur-2xl opacity-60 dark:opacity-80" />
 
-        <form method="GET" className="space-y-4 w-full">
-          <input
-            type="text"
-            name="username"
-            placeholder="Username or Email"
-            className="w-full border p-2 rounded text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+        {/* Card */}
+        <div className="relative bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/70 dark:border-slate-700/80 rounded-3xl shadow-[0_24px_60px_rgba(15,23,42,0.35)] px-8 py-10 flex flex-col items-center space-y-8">
+          {/* Header */}
+          <div className="w-full text-center space-y-2">
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+              Welcome back
+            </h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Log in to manage projects, people and hours.
+            </p>
+          </div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="w-full border p-2 rounded text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+          {/* Error global */}
+          {(error || errors.email || errors.password) && (
+            <p className="w-full text-xs text-red-500 text-center">
+              {error
+                ? "Login failed. Please check your credentials."
+                : errors.email?.message || errors.password?.message}
+            </p>
+          )}
 
-          <button
-            type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 border border-blue-800 p-2 rounded cursor-pointer font-semibold text-white transition"
-          >
-            Log in
-          </button>
-        </form>
+          {/* Form */}
+          <FormProvider {...methods}>
+            <form
+              onSubmit={handleSubmit(handleLogin)}
+              className="space-y-5 w-full"
+            >
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="email"
+                  className="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+                >
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="text"
+                  placeholder="you@example.com"
+                  {...register("email", validationRules.email)}
+                  className="w-full rounded-xl border border-slate-300/90 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                />
+              </div>
 
-        {/* Separador */}
-        <div className="flex items-center w-full gap-3">
-          <span className="h-px flex-1 bg-gray-300" />
-          <span className="text-xs text-gray-500">or continue with</span>
-          <span className="h-px flex-1 bg-gray-300" />
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+                  >
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    className="text-xs font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+                  >
+                    Forgot?
+                  </button>
+                </div>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  {...register("password", validationRules.password)}
+                  className="w-full rounded-xl border border-slate-300/90 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-3 py-2.5 text-sm text-slate-900 dark:text-slate-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 text-sm font-semibold text-white py-2.5 shadow-lg shadow-indigo-500/30 hover:from-indigo-500 hover:via-sky-400 hover:to-emerald-400 active:scale-[0.99] transition disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Logging in..." : "Log in"}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white/80 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </FormProvider>
+
+          {/* Divider */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-700 to-transparent" />
+
+          {/* Register link */}
+          <p className="text-center text-sm text-slate-600 dark:text-slate-400">
+            Don’t have an account?{" "}
+            <Link
+              to="/register"
+              className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
+              Register
+            </Link>
+          </p>
         </div>
-
-        {/* Botones sociales */}
-        <div className="w-full space-y-2">
-          <button
-            type="button"
-            onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
-          >
-            {/* Icono simple “G” (puedes cambiarlo por un SVG oficial) */}
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white border border-gray-300 text-xs">
-              G
-            </span>
-            <span>Continue with Google</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={handleFacebookLogin}
-            className="w-full flex items-center justify-center gap-2 rounded-md py-2 text-sm font-semibold text-white bg-[#1877F2] hover:bg-[#145dbd] transition"
-          >
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white/10 text-xs font-bold">
-              f
-            </span>
-            <span>Continue with Facebook</span>
-          </button>
-        </div>
-
-        <p className="text-center text-sm">
-          Don’t have an account?{" "}
-          <Link to="/register" className="underline font-bold">
-            Register
-          </Link>
-        </p>
       </div>
     </div>
   );

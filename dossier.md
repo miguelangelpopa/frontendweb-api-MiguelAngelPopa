@@ -29,15 +29,15 @@
 
 ### Lokale omgeving
 
-- **E-mailadres**: <test@example.com>
-- **Wachtwoord**: testpassword
-- **Rol**: admin/user
+- **E-mailadres**: <popa@clavimial.be>
+- **Wachtwoord**: esp52!ro
+- **Rol**: admin/Boss
 
 ### Online omgeving
 
-- **E-mailadres**: <test@example.com>
-- **Wachtwoord**: testpassword
-- **Rol**: admin/user
+- **E-mailadres**: <popa@clavimial.be>
+- **Wachtwoord**: esp52!ro
+- **Rol**: admin/Boss
 
 ## 📖 Projectbeschrijving
 
@@ -84,8 +84,8 @@ Belangrijkste Relaties:
    * Elke User is gekoppeld aan een Role. Dit bepaalt waarschijnlijk wie uren mag goedkeuren (approvedBy in de Hours tabel) en wie alleen uren mag indienen.
 ## ✅ Ontvankelijkheidscriteria
 
-- [ ] Het project van Web Services voldoet aan **alle** ontvankelijkheidscriteria zoals beschreven in de rubrics.
-- [ ] Het project van Front-end Web Development voldoet aan **alle** ontvankelijkheidscriteria zoals beschreven in de rubrics.
+- [X] Het project van Web Services voldoet aan **alle** ontvankelijkheidscriteria zoals beschreven in de rubrics.
+- [X] Het project van Front-end Web Development voldoet aan **alle** ontvankelijkheidscriteria zoals beschreven in de rubrics.
 
 ## 🚀 Extra technologieën
 
@@ -93,9 +93,9 @@ Belangrijkste Relaties:
 
 ### Front-end Web Development
 
-- <LINK_NAAR_NPM_PACKAGE>
-  - [Reden van keuze]
-- ...
+- <[LINK_NAAR_NPM_PACKAGE](https://www.npmjs.com/package/recharts)>
+  - Recharts
+    * Ingezet om de gewerkte uren van werknemers visueel weer te geven in een interactieve staafgrafiek (component WorkerHours) met een week- of maandweergave. Zo krijgen gebruikers in één oogopslag inzicht in hun geregistreerde uren.
 
 ### Web Services
 
@@ -109,24 +109,26 @@ Belangrijkste Relaties:
 
 **Wat heb je geleerd?**
 
-[Beschrijf je belangrijkste leermoment...]
+Tijdens dit project is mijn begrip van een volledige full‑stack workflow enorm gegroeid: van het uittekenen van een ERD en het opzetten van database‑migraties in Drizzle tot het bouwen van een REST‑API met NestJS en die laten samenwerken met de frontend. Ik heb ook gemerkt dat er dingen zijn die niets met programmeren te maken hebben, maar minstens even belangrijk zijn, zoals kiezen met wie je samenwerkt, omdat een situatie van de ene dag op de andere volledig kan veranderen.
 
 **Wat vond je goed aan dit project?**
 
-[Positieve aspecten...]
+Om eerlijk te zijn ben ik vooral trots op de homepage, die vind ik echt mooi gelukt. Ik was al gewend om eenvoudige websites te maken met enkel front‑end en soms een contactformulier in PHP, maar dit voelt veel professioneler aan. Ik vond het ook heel interessant om eens echt aan de back‑end te werken en te zien hoe alles samenkomt met de database en de API.
 
 **Wat zou je anders doen?**
 
-[Verbeterpunten voor jezelf...]
+In de toekomst zou ik waarschijnlijk liever alleen werken of met iemand in wie ik heel veel vertrouwen heb, omdat ik nu heb meegemaakt hoe lastig het wordt als dat vertrouwen wegvalt. Ik zou ook proberen om elke dag iets kleins te doen aan het project, want in de laatste twee weken had ik tegelijk griep én een laptop die door een hardwareprobleem zichzelf begon vol te typen, en dat heeft de druk richting de deadline serieus verhoogd.
 
 **Wat waren de grootste uitdagingen?**
 
-[Moeilijkheden die je bent tegengekomen...]
+ De aansluiting tussen Drizzle‑schema, migraties, seed‑data en de externe MySQL‑databank in het VIC (fouten in DATABASE_URL of migraties breken meteen alles).  
+ 
+Het correct configureren van Docker en Render (env‑variabelen, CORS, VITE_API_URL, DATABASE_URL) zodat front‑end en back‑end zowel lokaal als online met elkaar konden praten zonder CORS‑fouten of connectieproblemen naar de VIC‑database.
 
 **Wat zou je behouden aan de cursus?**
 
-[Wat werkt goed...]
+De combinatie van een uitgewerkt voorbeeldproject met duidelijke stappen (schema, seed, auth, Docker, Render) én de vrijheid om een eigen case uit te werken, werkt motiverend.
 
 **Wat zou je toevoegen/aanpassen?**
 
-[Suggesties voor verbetering...]
+Een korte, verplichte tussenstap waarin iedereen al halverwege het semester zijn backend eens op Render en de VIC‑databank moet deployen, zou veel stress op het einde wegnemen.
